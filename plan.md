@@ -286,7 +286,7 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 - [x] Revisar os arquivos candidatos à entrega. A busca por padrões comuns de credenciais não encontrou ocorrências e os únicos assets públicos são o favicon e a imagem Open Graph originais.
 - [x] Confirmar que `main` é a branch padrão remota e que o lockfile local permite `npm ci`.
-- [ ] Incluir a versão local e `package-lock.json` na `main` antes de conectar a integração Git do Pages.
+- [x] Enviar a versão do portfólio e `package-lock.json` à `main` do GitHub e conferir o commit remoto.
 - [x] Rodar `npm run build` e verificar `dist/index.html` e as rotas publicáveis.
 - [x] Confirmar configurações necessárias em `astro.config.mjs`, sem SSR.
 - [ ] Confirmar URL pública, política de privacidade se aplicável e links finais.
