@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./fonts.css";
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    line-height: var(--body-leading);
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size);
+    font-weight: 700;
+    line-height: var(--heading-leading);
+    letter-spacing: var(--heading-tracking);
+  }
+
+  h3 {
+    font-size: var(--subheading-size);
+    font-weight: 500;
+    line-height: var(--subheading-leading);
+    letter-spacing: var(--subheading-tracking);
+  }
+
+  ::selection {
+    background: var(--color-text-primary);
+    color: var(--color-background);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  .page-shell {
+    width: calc(100% - 2 * var(--gutter));
+    max-width: var(--content-width);
+    margin-inline: auto;
+  }
+
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    gap: var(--grid-gap);
+  }
+
+  .text-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--nav-size);
+    font-weight: 500;
+    line-height: var(--nav-leading);
+    letter-spacing: var(--nav-tracking);
+    text-underline-offset: 0.3em;
+  }
+
+  .text-link:hover,
+  .text-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .text-link:active {
+    color: var(--color-text-secondary);
+  }
+
+  .text-link > [aria-hidden="true"] {
+    opacity: 0.72;
+  }
+
+  .text-link:is(:hover, :focus-visible) > [aria-hidden="true"] {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .text-link {
+      transition: color var(--motion-micro);
+    }
+
+    .text-link > [aria-hidden="true"] {
+      transition: opacity var(--motion-micro);
+    }
+  }
+
+  .secondary-text {
+    color: var(--color-text-secondary);
+  }
+
+  .meta {
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    line-height: var(--meta-leading);
+    letter-spacing: var(--meta-tracking);
+  }
+}

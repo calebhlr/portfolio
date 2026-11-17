@@ -3,7 +3,8 @@
 > **Projeto:** Caleb Lopes — Personal Portfolio  
 > **Versão:** 1.0.0 · **Data-base:** 16/11/2026  
 > **Stack:** Astro + TypeScript + Tailwind CSS 4 · SSG · Cloudflare Pages  
-> **Estado inicial:** planejamento concluído; implementação **não verificada**  
+> **Estado atual:** F0–F3 validadas localmente. O pré-deploy da F4 está pronto. A publicação foi autorizada e aguarda acesso ao Cloudflare Pages e os arquivos de fonte licenciados.
+>
 > **Função deste arquivo:** roadmap operacional, rastreabilidade de tarefas e critérios de passagem entre fases.
 
 ## 0. Como usar este documento
@@ -67,11 +68,12 @@ Aproximadamente **70% da direção visual** deve se inspirar na linguagem da [IV
 ### Dependências externas que ainda precisam ser resolvidas
 
 - [ ] Receber ou licenciar webfonts **Söhne Breit** e **Söhne** apropriadas para publicação. Enquanto indisponíveis, utilizar fallback identificado como temporário.
-- [ ] Aprovar copy pessoal final (a frase de posicionamento do README é um placeholder).
-- [ ] Confirmar projetos, classificação, evidências e links verdadeiros.
-- [ ] Confirmar e-mail, GitHub, LinkedIn, currículo e demais links públicos.
-- [ ] Definir domínio, favicon/monograma e imagem Open Graph próprios.
-- [ ] Autorizar a publicação no Cloudflare Pages ao final das fases locais.
+- [x] Revisar o posicionamento em inglês e alinhar o README com a homepage.
+- [x] Confirmar projeto, classificação, evidências, link e papel de Caleb no PSF Predicts.
+- [x] Confirmar o canal público inicial (WhatsApp).
+- [x] Criar favicon e imagem Open Graph originais.
+- [ ] Definir a URL pública definitiva.
+- [x] Obter autorização para publicar no Cloudflare Pages.
 
 Nenhuma dessas pendências autoriza a IA a criar informações biográficas ou ativos falsos.
 
@@ -81,11 +83,11 @@ Nenhuma dessas pendências autoriza a IA a criar informações biográficas ou a
 
 | ID | Fase | Dependência | Principal entrega | Status |
 | --- | --- | --- | --- | --- |
-| **F0** | Fundação | Documentos disponíveis | Astro estático, tokens, layout e componentes-base | Não iniciada |
-| **F1** | Homepage | F0 validada | Home tipográfica, responsiva e navegável | Não iniciada |
-| **F2** | Conteúdo e páginas | F1 + conteúdo real | Rotas de competências, About, Contact e cases existentes | Não autorizada |
-| **F3** | Acabamento e QA | F2 suficiente | Motion discreto, SEO, testes e polimento | Não autorizada |
-| **F4** | Publicação e evolução | F3 aprovada | Cloudflare Pages + domínio/monitoramento básico | Não autorizada |
+| **F0** | Fundação | Documentos disponíveis | Astro estático, tokens, layout e componentes-base | Validada localmente |
+| **F1** | Homepage | F0 validada | Home tipográfica, responsiva e navegável | Validada localmente, aguardando revisão |
+| **F2** | Conteúdo e páginas | F1 + conteúdo real | Rotas de áreas, About, Contact e estudo de caso PSF Predicts | Validada localmente, com conteúdo complementar pendente |
+| **F3** | Acabamento e QA | F2 suficiente | Motion discreto, SEO, testes e polimento | Validada localmente |
+| **F4** | Publicação e evolução | F3 aprovada | Cloudflare Pages + domínio/monitoramento básico | Pré-deploy validado. Deploy aguarda o acesso ao Pages e as fontes. |
 
 **Fluxo obrigatório:** `F0 → F1 → revisão → F2 → revisão → F3 → aprovação para publicação → F4`.
 
@@ -99,24 +101,24 @@ Nenhuma dessas pendências autoriza a IA a criar informações biográficas ou a
 
 ### F0.1 — Inspeção e setup
 
-- [ ] Inspecionar a pasta atual e identificar arquivos existentes; **não sobrescrever** alterações do usuário.
-- [ ] Verificar presença de `README.md`, `rules.md`, `initial.md` e deste `plan.md`.
-- [ ] Garantir `docs/design-system.json` usando o **JSON adaptado** (`design-system-portfolio-v1.json`); não importar o JSON de extração técnica da IVERSON como tokens finais.
-- [ ] Inicializar **Astro + TypeScript** no diretório correto somente se o projeto ainda não existir.
-- [ ] Integrar **Tailwind CSS 4** pelo método suportado pelo Astro, sem padrões de Tailwind 3.
-- [ ] Configurar `output: 'static'`, `.node-version` com `22` e `package-lock.json` versionável.
-- [ ] Conferir scripts `dev`, `build`, `preview` e verificação de tipos quando configurada.
-- [ ] Confirmar que não há Next.js, SSR, React obrigatório nem `@astrojs/cloudflare`.
+- [x] Inspecionar a pasta atual e identificar arquivos existentes; **não sobrescrever** alterações do usuário.
+- [x] Verificar presença de `README.md`, `rules.md`, `initial.md` e deste `plan.md`.
+- [x] Garantir `docs/design-system.json` usando o **JSON adaptado** (`design-system-portfolio-v1.json`); não importar o JSON de extração técnica da IVERSON como tokens finais.
+- [x] Inicializar **Astro + TypeScript** no diretório correto somente se o projeto ainda não existir.
+- [x] Integrar **Tailwind CSS 4** pelo método suportado pelo Astro, sem padrões de Tailwind 3.
+- [x] Configurar `output: 'static'`, `.node-version` com `22` e `package-lock.json` versionável.
+- [x] Conferir scripts `dev`, `build`, `preview` e verificação de tipos quando configurada.
+- [x] Confirmar que não há Next.js, SSR, React obrigatório nem `@astrojs/cloudflare`.
 
 ### F0.2 — Tokens e fundação de UI
 
-- [ ] Centralizar tokens em `src/styles/tokens.css`, preservando valores aprovados.
-- [ ] Criar `src/styles/fonts.css` e declarar **somente** fontes que estiverem licenciadas/disponíveis; caso contrário usar fallbacks temporários.
-- [ ] Criar `src/styles/global.css` com Tailwind 4, reset/base e importações consistentes.
-- [ ] Criar `src/layouts/BaseLayout.astro` com idioma, metadados básicos e CSS global importado uma vez.
-- [ ] Criar `SiteHeader.astro`, `SiteFooter.astro`, `Container.astro` e os componentes tipográficos **que tenham uso real**.
-- [ ] Garantir contraste adequado, foco visível, HTML semântico e uma única tag `h1` por página.
-- [ ] Criar `src/content/profile.ts` e `src/content/projects.ts` com tipos claros e **sem dados fictícios**.
+- [x] Centralizar tokens em `src/styles/tokens.css`, preservando valores aprovados.
+- [x] Criar `src/styles/fonts.css` e declarar **somente** fontes que estiverem licenciadas/disponíveis; caso contrário usar fallbacks temporários.
+- [x] Criar `src/styles/global.css` com Tailwind 4, reset/base e importações consistentes.
+- [x] Criar `src/layouts/BaseLayout.astro` com idioma, metadados básicos e CSS global importado uma vez.
+- [x] Criar `SiteHeader.astro` e `SiteFooter.astro`. O contêiner e a tipografia compartilhada usam classes e tokens CSS.
+- [x] Garantir contraste adequado, foco visível, HTML semântico e uma única tag `h1` por página.
+- [x] Criar `src/content/profile.ts` e `src/content/projects.ts` com tipos claros e **sem dados fictícios**.
 
 ### Entregáveis F0
 
@@ -137,11 +139,11 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### Validação e gate F0
 
-- [ ] `npm run build` executado com sucesso.
-- [ ] `dist/index.html` gerado.
-- [ ] Background, textos, tipografia/fallback e grid usam tokens centralizados.
-- [ ] Nenhum arquivo proprietário da IVERSON ou fonte sem licença entrou no projeto.
-- [ ] Relatório do agente registra arquivos, comandos realmente executados e bloqueios.
+- [x] `npm run build` executado com sucesso.
+- [x] `dist/index.html` gerado.
+- [x] Background, textos, tipografia/fallback e grid usam tokens centralizados.
+- [x] Nenhum arquivo proprietário da IVERSON ou fonte sem licença entrou no projeto.
+- [x] Relatório do agente registra arquivos, comandos realmente executados e bloqueios.
 
 **Gate:** a aplicação estática compila e a fundação visual é confiável. A F1 pode começar durante a mesma primeira execução se a F0 estiver consistente.
 
@@ -153,23 +155,23 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### F1.1 — Estrutura e hierarquia
 
-- [ ] Implementar header tipográfico com marca pessoal discreta e navegação **somente para destinos existentes**.
-- [ ] Implementar hero monumental com **CALEB LOPES** e quebra controlada em desktop e mobile.
-- [ ] Incluir posicionamento curto e provisório, marcando-o para revisão de copy.
-- [ ] Implementar **Selected Work** como lista editorial com números/linhas/metadados **apenas se houver projetos reais**.
-- [ ] Se não houver projetos cadastrados, ocultar a listagem ou mostrar estado vazio intencional; **não inventar cases**.
-- [ ] Apresentar as três áreas: **Artificial Intelligence**, **Development** e **Business & Growth**.
-- [ ] Para rotas futuras não criadas, apontar para seções já existentes ou mostrar texto sem link. **Zero links quebrados**.
-- [ ] Incluir apresentação pessoal concisa com informações confirmadas e rodapé com links reais ou sem links indisponíveis.
+- [x] Implementar header tipográfico com marca pessoal discreta e navegação **somente para destinos existentes**.
+- [x] Implementar hero monumental com **CALEB LOPES** e quebra controlada em desktop e mobile.
+- [x] Incluir posicionamento curto e provisório, marcando-o para revisão de copy.
+- N/A. Exibir entradas verificadas em **Selected Work** quando houver projetos reais. A página usa o estado vazio nesta entrega.
+- [x] Se não houver projetos cadastrados, ocultar a listagem ou mostrar estado vazio intencional; **não inventar cases**.
+- [x] Apresentar as três áreas: **Artificial Intelligence**, **Development** e **Business & Growth**.
+- [x] Para rotas futuras não criadas, apontar para seções já existentes ou mostrar texto sem link. **Zero links quebrados**.
+- [x] Incluir apresentação pessoal concisa com informações confirmadas e rodapé com links reais ou sem links indisponíveis.
 
 ### F1.2 — Responsividade e comportamento
 
-- [ ] Verificar larguras **360, 390, 768, 1024, 1440 e 1920px** quando houver navegador disponível.
-- [ ] Tratar viewport baixo e títulos grandes sem overflow horizontal.
-- [ ] Ajustar composição especificamente no mobile, em vez de apenas reduzir o desktop.
-- [ ] Garantir navegação por teclado e toque, `focus-visible` e contraste de textos pequenos.
-- [ ] Evitar vídeos, reveals e bibliotecas de animação nesta primeira versão.
-- [ ] Conferir semanticamente headings, links, landmarks e legibilidade.
+- [x] Verificar larguras **360, 390, 768, 1024, 1440 e 1920px** quando houver navegador disponível.
+- [x] Tratar viewport baixo e títulos grandes sem overflow horizontal.
+- [x] Ajustar composição especificamente no mobile, em vez de apenas reduzir o desktop.
+- [x] Garantir navegação por teclado e toque, `focus-visible` e contraste de textos pequenos.
+- [x] Evitar vídeos, reveals e bibliotecas de animação nesta primeira versão.
+- [x] Conferir semanticamente headings, links, landmarks e legibilidade.
 
 ### Entregáveis F1
 
@@ -180,12 +182,19 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### Validação e gate F1
 
-- [ ] `npm run build` e `npm run preview` executados quando o ambiente permitir.
-- [ ] A home é utilizável sem animações ou JS adicional.
-- [ ] Não há links mortos nem conteúdo profissional inventado.
-- [ ] Inspeção responsiva e visual registrada com **viewports realmente verificadas**.
-- [ ] Diferenças decorrentes de fonte fallback foram documentadas sem alegar fidelidade total.
-- [ ] Mudanças, testes e pendências foram relatados.
+- [x] `npm run build` e `npm run preview` executados quando o ambiente permitir.
+- [x] A home é utilizável sem animações ou JS adicional.
+- [x] Não há links mortos nem conteúdo profissional inventado.
+- [x] Inspeção responsiva e visual registrada com **viewports realmente verificadas**.
+- [x] Diferenças decorrentes de fonte fallback foram documentadas sem alegar fidelidade total.
+- [x] Mudanças, testes e pendências foram relatados.
+
+**Evidências da primeira execução**
+
+- `npm ci`, `npm run check` e `npm run build` passaram com Node.js 22. O Astro Check analisou 9 arquivos com zero erros ou avisos. O build gerou `dist/index.html`.
+- `npm run preview` retornou HTTP 200. O Chromium verificou a home sem JavaScript em 360, 390, 768, 1024, 1440 e 1920 px, além de 390 × 360 e 1920 × 351 px. Não houve overflow horizontal, links internos sem alvo ou erros no console. As capturas de 390 e 1440 px foram revisadas visualmente.
+- Navegação por teclado, foco visível, link de pular para o conteúdo e links por toque verificados. O axe-core reportou zero violações nas regras WCAG A/AA executadas a 390 e 1440 px.
+- O fallback de sistema altera o peso visual e as métricas dos tipos. As fontes licenciadas, a aprovação do texto em inglês e os projetos e contatos confirmados seguem pendentes.
 
 **Gate:** apresentar a homepage para revisão visual do proprietário. **Parar após F1** na execução comandada por `initial.md`.
 
@@ -197,29 +206,27 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### F2.1 — Arquitetura e páginas
 
-- [ ] Implementar `/ai` com projetos/experimentos e contexto verificável.
-- [ ] Implementar `/development` para software e Salesforce, sem afirmar competências não comprovadas.
-- [ ] Implementar `/business` para marketing, vendas e growth com histórico e resultados documentáveis.
-- [ ] Implementar `/about` com narrativa profissional consistente e informações validadas.
-- [ ] Implementar `/contact` com meios de contato autorizados.
-- [ ] Ajustar navegação para incluir **somente** rotas concluídas.
-- [ ] Manter design coerente entre todas as rotas, sem templates visuais distintos por área.
+- [x] Implementar `/ai`, `/development` e `/business` com os temas de cada área. A página Development apresenta software, Salesforce e o estudo de caso disponível.
+- [x] Implementar `/about` com apresentação pessoal e interesses.
+- [x] Implementar `/contact` com o WhatsApp autorizado.
+- [x] Ajustar a navegação e manter o layout editorial compartilhado entre as rotas.
+- [ ] Acrescentar projetos de IA, histórico de negócios e detalhes da trajetória quando houver material confirmado.
 
 ### F2.2 — Estudos de caso
 
-- [ ] Definir schema de projeto local e tipado: título, área, categoria (profissional/pessoal/experimento/estudo), resumo, papel, evidências, links e conteúdo.
-- [ ] Criar `/projects/[slug]` com **`getStaticPaths()`** apenas para casos reais cadastrados.
-- [ ] Estruturar cada case em **contexto → papel → processo → evidência/resultado → links**.
-- [ ] Conferir que projetos sem métricas reais não exibam números estimados como fatos.
-- [ ] Verificar que toda URL de projeto/demonstração funcione e que a autoria esteja correta.
-- [ ] Incluir imagens/prints de autoria própria ou com direitos de uso, otimizados quando necessário.
+- [x] Definir schema local e tipado, com título, área, categoria, resumo, contexto, papel, processo, evidências e links.
+- [x] Gerar `/projects/[slug]` com `getStaticPaths()` para projetos cadastrados.
+- [x] Documentar contexto, processo, evidência e repositório público do PSF Predicts. A descrição usa o README e o código público como fontes.
+- [x] Conferir o link do repositório e omitir métricas sem evidência.
+- [x] Registrar a confirmação de Caleb de que desenvolveu o PSF Predicts de ponta a ponta.
 
 ### Gate F2
 
-- [ ] Rotas planejadas têm conteúdo útil e não são páginas vazias.
-- [ ] A navegação funciona inclusive acessando as rotas diretamente.
-- [ ] Não existem placeholders enganosos, experiências inventadas ou links internos quebrados.
-- [ ] Build estático inclui todas as rotas realmente implementadas.
+- [x] Rotas implementadas contêm informação útil e usam dados confirmados ou textos de interesse editorial.
+- [x] A navegação funciona com acesso direto e recarregamento.
+- [x] Os links internos têm destinos válidos e o build estático inclui as sete páginas do portfólio.
+
+**Evidências:** `npm run check` e `npm run build` passaram com Node.js 22. `npm run preview` serviu as sete páginas. O Chromium verificou links, foco por teclado e largura sem overflow em 360, 390, 768, 1024, 1440 e 1920 px. O axe-core reportou zero violações nas regras WCAG A/AA executadas em 390 e 1440 px. O favicon segue previsto para F3.
 
 ---
 
@@ -229,23 +236,23 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### F3.1 — Polimento visual e movimento
 
-- [ ] Refinar proporções dos títulos, espaços negativos, alinhamentos e ritmo entre seções.
-- [ ] Revisar estados `hover`, `active` e `focus` dos links editoriais.
-- [ ] Adicionar microinterações CSS **somente onde melhorarem orientação ou feedback**.
-- [ ] Adicionar reveals pontuais somente se a interface funcionar perfeitamente sem eles.
-- [ ] Respeitar `prefers-reduced-motion: reduce` e evitar conteúdo invisível quando o JS falhar.
-- [ ] Verificar carregamento de fontes licenciadas, pesos reais, FOUT/CLS e fallback.
+- [x] Refinar proporções dos títulos, espaços negativos, alinhamentos e ritmo entre seções.
+- [x] Revisar estados `hover`, `active` e `focus` dos links editoriais.
+- [x] Adicionar microinterações CSS **somente onde melhorarem orientação ou feedback**.
+- N/A. O conteúdo aparece imediatamente. O feedback de interação usa transições CSS nos links.
+- [x] Respeitar `prefers-reduced-motion: reduce` e evitar conteúdo invisível quando o JS falhar.
+- [x] Verificar os fallbacks tipográficos. Os arquivos Söhne e Söhne Breit licenciados seguem pendentes.
 
 ### F3.2 — Metadados e entrega
 
-- [ ] Criar favicon/monograma **original**.
-- [ ] Definir `title` e `description` únicos para cada página.
-- [ ] Criar imagem Open Graph original e revisar preview de compartilhamento.
-- [ ] Configurar canonical/`site` **apenas com URL real definida**.
-- [ ] Tratar imagens responsivas, tamanhos intrínsecos e carregamento eficiente.
-- [ ] Revisar semântica, contraste com alvo **WCAG AA**, teclado e links externos.
-- [ ] Medir desempenho com ferramentas realmente disponíveis; registrar resultados e ambiente.
-- [ ] Garantir ausência de segredos, trackers não aprovados e assets de terceiros não autorizados.
+- [x] Criar favicon/monograma **original**.
+- [x] Definir `title` e `description` únicos para cada página.
+- [x] Criar imagem Open Graph original e revisar preview de compartilhamento.
+- [x] Preparar canonical e metadados sociais com a variável `SITE_URL` e verificar com domínio reservado de teste. O valor de produção será definido no Pages.
+- [x] Validar os tamanhos do favicon e da imagem Open Graph. As páginas não carregam imagens no corpo.
+- [x] Revisar semântica, contraste, teclado e links. O GitHub respondeu HTTP 200. O proxy retornou 403 no CONNECT para o WhatsApp, cujo endereço renderizado foi conferido.
+- [x] Medir desempenho com ferramentas realmente disponíveis; registrar resultados e ambiente.
+- [x] Garantir ausência de segredos, trackers não aprovados e assets de terceiros não autorizados.
 
 ### Checklist de QA
 
@@ -261,6 +268,12 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 | Fontes | Arquivos licenciados ou pendência reconhecida |
 | Performance | Avaliada com evidências, sem promessa de nota arbitrária |
 
+**Evidências locais**
+
+- `npm ci`, `npm run check` e `npm run build` passaram com Node.js 22. O build gerou sete páginas navegáveis, uma página 404 e os assets. O pacote ocupou 84 KB somando os arquivos e diretórios.
+- Chromium passou em 360, 390, 768, 1024, 1440 e 1920 px, incluindo 1920 × 351. Foram verificados 23 destinos internos, além de teclado, foco, toque, estado pressionado e movimento reduzido. O axe-core apontou zero violações nas regras WCAG A/AA executadas em 390 e 1440 px.
+- Lighthouse 13.6.0 em Chromium local. Na homepage com perfis móvel e desktop, Performance, Accessibility, Best Practices e SEO marcaram 100. LCP de 0,8 s em móvel e 0,2 s em desktop, com CLS de 0 nos dois perfis. Resultados de laboratório, antes da publicação.
+
 **Gate F3:** entregar site pronto para aprovação final. **Não publicar** por conta própria.
 
 ---
@@ -271,10 +284,11 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 
 ### F4.1 — Pré-deploy
 
-- [ ] Revisar os arquivos versionados e remover credenciais, `.env` privados, assets da IVERSON e fontes não licenciadas.
-- [ ] Confirmar a branch de produção `main` e lockfile versionado.
-- [ ] Rodar `npm run build` e verificar `dist/index.html` e as rotas publicáveis.
-- [ ] Confirmar configurações necessárias em `astro.config.mjs`, sem SSR.
+- [x] Revisar os arquivos candidatos à entrega. A busca por padrões comuns de credenciais não encontrou ocorrências e os únicos assets públicos são o favicon e a imagem Open Graph originais.
+- [x] Confirmar que `main` é a branch padrão remota e que o lockfile local permite `npm ci`.
+- [ ] Incluir a versão local e `package-lock.json` na `main` antes de conectar a integração Git do Pages.
+- [x] Rodar `npm run build` e verificar `dist/index.html` e as rotas publicáveis.
+- [x] Confirmar configurações necessárias em `astro.config.mjs`, sem SSR.
 - [ ] Confirmar URL pública, política de privacidade se aplicável e links finais.
 
 ### F4.2 — Cloudflare Pages
@@ -297,6 +311,10 @@ A lista é indicativa: **não criar componentes ou pastas vazias apenas para sat
 - [ ] Configurar domínio próprio e atualizar canonical somente quando confirmado.
 - [ ] Validar previews de PR/branch, se habilitados na integração.
 - [ ] Registrar a versão publicada e possíveis problemas remanescentes.
+
+**Evidências do pré-deploy:** `wrangler pages dev dist` serviu as sete rotas e os dois assets com HTTP 200. Uma rota inexistente retornou HTTP 404 com a página personalizada. O processo rodou localmente, sem Functions. A configuração de produção está descrita no [README](README.md#cloudflare-pages).
+
+**Pendência:** o proprietário confirmou que ainda vai configurar o acesso ao Pages e fornecer as fontes licenciadas. A publicação, a URL pública, a configuração de `SITE_URL` e os testes em produção permanecem em aberto.
 
 ### Gate F4
 
@@ -324,11 +342,13 @@ Uma tarefa ou fase só pode ser marcada como concluída quando todos os itens re
 
 ## 9. Registro de progresso — atualizar ao final de cada sessão
 
-> **Estado atual:** nenhum código do portfólio foi implementado ou testado no contexto da criação deste documento. Os checkboxes permanecem abertos até execução comprovada na IDE.
-
 | Data | Fase/tarefa | Arquivos modificados | Validação realizada | Status/bloqueio |
 | --- | --- | --- | --- | --- |
 | 2026-11-16 | Criação do plano | `plan.md` | Revisão de consistência com README, rules, initial e JSON | Planejado; sem implementação |
+| 2026-11-17 | F0 e F1 | Configuração Astro/TypeScript/npm, `docs/design-system.json`, `src/`, `plan.md` | Build estático, checagem de tipos, HTTP em dev e preview e testes no Chromium | Validado localmente. Aguardando revisão da homepage. |
+| 2026-11-17 | F2 | Rotas e layout editorial em `src/`, conteúdo local e `plan.md` | Checagem de tipos, build de sete páginas, navegação direta e testes no Chromium | Validada localmente. Papel no PSF Predicts e conteúdo complementar pendentes. |
+| 2026-11-17 | F3 e pré-deploy F4 | Metadados, estilos, página 404, assets próprios e instruções do Pages | Checagem de tipos, build, Chromium, axe-core, Lighthouse e Wrangler Pages local | F3 validada. Publicação aguarda configuração do proprietário. |
+| 2026-11-17 | Revisão de publicação | Posicionamento da homepage, autoria no case PSF Predicts e documentação | Checagem de tipos sem diagnósticos e build de sete páginas e 404 | Autorizada. Aguardando fontes licenciadas e acesso ao Cloudflare Pages. |
 
 ### Modelo de atualização do agente
 

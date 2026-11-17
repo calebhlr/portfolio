@@ -1,0 +1,22 @@
+---
+import { profile } from '../../content/profile';
+---
+
+<footer class="site-footer page-shell flex flex-wrap items-center justify-between">
+  <span>{profile.name}</span>
+  {profile.links.length > 0 && (
+    <ul class="flex flex-wrap gap-4">
+      {profile.links.map(({ href, label }) => <li><a class="text-link" href={href}>{label}</a></li>)}
+    </ul>
+  )}
+  <a class="text-link" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+</footer>
+
+<style>
+  .site-footer {
+    min-block-size: var(--space-4xl);
+    gap: var(--space-sm) var(--space-lg);
+    border-block-start: var(--divider);
+    font-size: var(--nav-size);
+  }
+</style>

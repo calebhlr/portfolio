@@ -1,0 +1,226 @@
+{
+  "name": "Caleb Lopes — Personal Portfolio Design System",
+  "version": "1.0.0",
+  "status": "proposta inicial baseada em auditoria de referência",
+  "reference": {
+    "url": "https://iverson.inc/",
+    "direction": "70% linguagem visual inspirada na IVERSON / 30% identidade própria",
+    "interpretation": "proporção criativa, não valor técnico mensurável",
+    "sourceFiles": [
+      "design-system.json",
+      "Iverson - Brand, Product, Web & Video Agency.html",
+      "site-source.zip"
+    ],
+    "referenceFacts": {
+      "colors": {
+        "background": "#060606",
+        "whiteMuted": "#FCFCFC",
+        "greyLight": "#727272",
+        "greyVariant": "#545454",
+        "grey": "#1C1C1C",
+        "greyDark": "#1B1B1B"
+      },
+      "fontFamilies": [
+        "Die Grotesk C",
+        "Die Grotesk B",
+        "ABC Repro Mono",
+        "Senes"
+      ],
+      "desktopGridColumns": 16,
+      "gridGap": "0.75rem",
+      "gutter": "1.25rem",
+      "desktopBase": "1440px",
+      "mobileBase": "390px"
+    }
+  },
+  "brand": {
+    "person": "Caleb Lopes",
+    "personality": [
+      "editorial",
+      "preciso",
+      "ambicioso",
+      "tecnológico",
+      "discreto"
+    ],
+    "archetype": "marca pessoal multidisciplinar",
+    "principle": "A tipografia é a identidade. A interface não compete com o conteúdo.",
+    "domains": [
+      "Artificial Intelligence",
+      "Development",
+      "Business & Growth"
+    ]
+  },
+  "tokens": {
+    "color": {
+      "background": "#060606",
+      "surface": "#141414",
+      "surfaceElevated": "#1C1C1C",
+      "textPrimary": "#FCFCFC",
+      "textSecondary": "#A5A5A5",
+      "textTertiary": "#858585",
+      "border": "#292929",
+      "borderStrong": "#454545",
+      "focus": "#FCFCFC"
+    },
+    "typography": {
+      "display": {
+        "family": "Söhne Breit",
+        "weight": 800,
+        "fallback": "Arial Black, Arial, sans-serif",
+        "size": "clamp(4rem, 11vw, 11rem)",
+        "lineHeight": 0.89,
+        "letterSpacing": "-0.055em",
+        "case": "uppercase"
+      },
+      "heading1": {
+        "family": "Söhne Breit",
+        "weight": 800,
+        "size": "clamp(3rem, 7vw, 7rem)",
+        "lineHeight": 0.96,
+        "letterSpacing": "-0.045em"
+      },
+      "heading2": {
+        "family": "Söhne Breit",
+        "weight": 700,
+        "size": "clamp(2rem, 4.4vw, 4.75rem)",
+        "lineHeight": 1.03,
+        "letterSpacing": "-0.035em"
+      },
+      "heading3": {
+        "family": "Söhne",
+        "weight": 500,
+        "size": "clamp(1.5rem, 2.6vw, 2.75rem)",
+        "lineHeight": 1.13,
+        "letterSpacing": "-0.02em"
+      },
+      "body": {
+        "family": "Söhne",
+        "weight": 400,
+        "size": "clamp(1rem, 1.25vw, 1.25rem)",
+        "lineHeight": 1.55,
+        "letterSpacing": "0"
+      },
+      "navigation": {
+        "family": "Söhne",
+        "weight": 500,
+        "size": "0.875rem",
+        "lineHeight": 1.35,
+        "letterSpacing": "0.005em"
+      },
+      "label": {
+        "family": "Söhne",
+        "weight": 500,
+        "size": "0.75rem",
+        "lineHeight": 1.3,
+        "letterSpacing": "0.08em",
+        "case": "uppercase"
+      },
+      "meta": {
+        "family": "ui-monospace, SFMono-Regular, Consolas, monospace",
+        "weight": 400,
+        "size": "0.75rem",
+        "lineHeight": 1.45,
+        "letterSpacing": "0.025em"
+      },
+      "licenseNote": "Söhne e Söhne Breit são fontes comerciais; não estão incluídas neste arquivo. Não incorporar arquivos tipográficos sem licença."
+    },
+    "layout": {
+      "maxContentWidth": "1600px",
+      "gutterDesktop": "20px",
+      "gutterMobile": "16px",
+      "gridColumnsDesktop": 16,
+      "gridColumnsTablet": 8,
+      "gridColumnsMobile": 4,
+      "gridGap": "12px",
+      "breakpoints": {
+        "tablet": "768px",
+        "desktop": "1024px",
+        "wide": "1920px"
+      },
+      "sectionPaddingBlock": "clamp(96px, 13vw, 220px)",
+      "heroMinHeight": "min(860px, 100svh)"
+    },
+    "spacingPx": {
+      "2xs": 4,
+      "xs": 8,
+      "sm": 12,
+      "md": 16,
+      "lg": 24,
+      "xl": 32,
+      "2xl": 48,
+      "3xl": 64,
+      "4xl": 96,
+      "5xl": 144
+    },
+    "shape": {
+      "radiusNone": "0px",
+      "radiusSubtle": "2px",
+      "divider": "1px solid #292929"
+    },
+    "motion": {
+      "micro": "150ms cubic-bezier(.4, 0, .2, 1)",
+      "transition": "320ms cubic-bezier(.22, 1, .36, 1)",
+      "reveal": "700ms cubic-bezier(.22, 1, .36, 1)",
+      "reducedMotion": "desativar translações e animações não essenciais quando prefers-reduced-motion: reduce"
+    }
+  },
+  "components": {
+    "header": "logotipo tipográfico pequeno e links textuais; sem fundos flutuantes por padrão",
+    "hero": "nome monumental em duas linhas; uma frase de posicionamento e um indicador de rolagem",
+    "projectIndex": "lista editorial com números, títulos e divisórias; sem cards arredondados",
+    "caseStudy": "problema, papel, processo, evidência e resultado; privilegiar clareza para recrutadores",
+    "footer": "contato direto, links profissionais e assinatura tipográfica"
+  },
+  "pageArchitecture": [
+    {
+      "path": "/",
+      "purpose": "marca pessoal, projetos selecionados e rotas profissionais"
+    },
+    {
+      "path": "/ai",
+      "purpose": "projetos e experimentos com IA"
+    },
+    {
+      "path": "/development",
+      "purpose": "software, Salesforce e desenvolvimento"
+    },
+    {
+      "path": "/business",
+      "purpose": "marketing, vendas e growth"
+    },
+    {
+      "path": "/about",
+      "purpose": "trajetória e competências"
+    },
+    {
+      "path": "/contact",
+      "purpose": "meios de contato"
+    }
+  ],
+  "guardrails": [
+    "Não copiar logotipo, vídeos, imagens, textos ou composição exata da IVERSON.",
+    "Não usar Die Grotesk como identidade principal.",
+    "Preferir uma única família de títulos forte e uma família funcional de texto.",
+    "Não usar gradientes decorativos, cards coloridos ou sombras ostensivas.",
+    "Manter navegação por teclado, contraste legível e foco visível.",
+    "Apresentar projetos e competências com evidências verificáveis.",
+    "Verificar licença de Söhne/Söhne Breit antes de publicar."
+  ],
+  "provenance": {
+    "referenceExtracted": [
+      "cores de referência",
+      "16 colunas",
+      "gap de 12px",
+      "gutter 20px",
+      "nomes das fontes usadas pela IVERSON"
+    ],
+    "proposedNotReferenceFacts": [
+      "uso de Söhne",
+      "valores da escala de tipografia",
+      "cores secundárias adaptadas",
+      "tokens de movimento",
+      "arquitetura de páginas",
+      "componentes"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+---
+import { profile } from '../../content/profile';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/#work', label: 'Work' },
+  { href: '/#focus', label: 'Focus' },
+  { href: '/about/', label: 'About' },
+];
+
+if (profile.links.length > 0) {
+  links.push({ href: '/contact/', label: 'Contact' });
+}
+---
+
+<header class="site-header page-shell flex flex-wrap items-center justify-between">
+  <a class="signature text-link" href="/" aria-current={currentPath === '/' ? 'page' : undefined}>
+    {profile.name}
+  </a>
+  <nav class="flex flex-wrap items-center" aria-label="Main">
+    {links.map(({ href, label }) => (
+      <a class="text-link" href={href} aria-current={currentPath + '/' === href ? 'page' : undefined}>
+        {label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    min-block-size: var(--header-height);
+    column-gap: var(--space-lg);
+    border-block-end: var(--divider);
+  }
+
+  nav {
+    column-gap: clamp(var(--space-md), 3.2vw, var(--space-2xl));
+  }
+
+  nav [aria-current="page"] {
+    text-decoration: underline;
+  }
+
+  .signature {
+    font-weight: 700;
+  }
+</style>

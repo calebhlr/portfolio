@@ -1,0 +1,6 @@
+:root {
+  /* Temporary system fallbacks until licensed Söhne webfonts are available. */
+  --font-display: "Arial Black", Arial, sans-serif;
+  --font-body: Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}

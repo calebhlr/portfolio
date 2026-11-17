@@ -1,0 +1,44 @@
+---
+import { disciplines } from '../../content/profile';
+import { projectTypes, type Project } from '../../content/projects';
+
+interface Props {
+  entries: Project[];
+}
+
+const { entries } = Astro.props;
+---
+
+{entries.length > 0 ? (
+  <ul class="project-index" role="list">
+    {entries.map(project => (
+      <li>
+        <p class="meta">
+          {disciplines.find(({ id }) => id === project.area)?.title} · {projectTypes[project.type]}
+        </p>
+        <h3>
+          <a class="text-link project-link" href={'/projects/' + project.slug + '/'}>
+            {project.title} <span aria-hidden="true">→</span>
+          </a>
+        </h3>
+        <p class="secondary-text">{project.summary}</p>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p class="secondary-text">No projects published yet.</p>
+)}
+
+<style>
+  .project-index li {
+    display: grid;
+    gap: var(--space-xs);
+    padding-block: var(--space-lg);
+    border-block-start: var(--divider);
+  }
+
+  .project-link {
+    font: inherit;
+    letter-spacing: inherit;
+  }
+</style>

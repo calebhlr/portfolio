@@ -1,0 +1,23 @@
+---
+import EditorialSection from '../components/layout/EditorialSection.astro';
+import { disciplines, profile } from '../content/profile';
+import EditorialPage from '../layouts/EditorialPage.astro';
+---
+
+<EditorialPage title="About" description={profile.introduction}>
+  <EditorialSection title="Interests" id="interests">
+    <p class="about-copy">{profile.about}</p>
+    <ul class="flex flex-wrap gap-x-6">
+      {disciplines.map(({ id, title }) => (
+        <li><a class="text-link" href={'/' + id + '/'}>{title} <span aria-hidden="true">→</span></a></li>
+      ))}
+    </ul>
+  </EditorialSection>
+</EditorialPage>
+
+<style>
+  .about-copy {
+    max-inline-size: 48ch;
+    margin-block-end: var(--space-md);
+  }
+</style>

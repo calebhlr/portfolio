@@ -1,0 +1,74 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import EditorialSection from '../components/layout/EditorialSection.astro';
+import ProjectIndex from '../components/projects/ProjectIndex.astro';
+import { disciplines, profile } from '../content/profile';
+import { projects } from '../content/projects';
+import EditorialPage from '../layouts/EditorialPage.astro';
+
+export const getStaticPaths = (() => [
+  ...disciplines.map(discipline => ({
+    params: { section: discipline.id },
+    props: { discipline },
+  })),
+  ...(profile.links.length > 0 ? [{
+    params: { section: 'contact' },
+    props: { discipline: null },
+  }] : []),
+]) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { discipline } = Astro.props;
+const areaProjects = discipline ? projects.filter(project => project.area === discipline.id) : [];
+---
+
+{discipline ? (
+  <EditorialPage
+    title={discipline.title}
+    description={discipline.description}
+    section={{ href: '/#focus', label: 'Areas of Focus' }}
+  >
+    <EditorialSection title="Topics" id="topics">
+      <ul class="topics" role="list">
+        {discipline.topics.map(({ title, description }) => (
+          <li>
+            <h3>{title}</h3>
+            <p class="secondary-text">{description}</p>
+          </li>
+        ))}
+      </ul>
+    </EditorialSection>
+    {areaProjects.length > 0 && (
+      <EditorialSection title="Projects" id="projects">
+        <ProjectIndex entries={areaProjects} />
+      </EditorialSection>
+    )}
+  </EditorialPage>
+) : (
+  <EditorialPage title="Contact" description={'Ways to reach ' + profile.name + '.'}>
+    <ul class="page-shell contact-links" role="list">
+      {profile.links.map(({ label, href }) => (
+        <li><a class="text-link" href={href}>{label}</a></li>
+      ))}
+    </ul>
+  </EditorialPage>
+)}
+
+<style>
+  .topics,
+  .contact-links {
+    border-block-end: var(--divider);
+  }
+
+  .topics li,
+  .contact-links li {
+    padding-block: var(--space-lg);
+    border-block-start: var(--divider);
+  }
+
+  .topics p {
+    max-inline-size: 48ch;
+    margin-block-start: var(--space-xs);
+  }
+</style>

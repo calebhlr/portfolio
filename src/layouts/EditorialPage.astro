@@ -1,0 +1,54 @@
+---
+import { profile } from '../content/profile';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  section?: { href: string; label: string };
+  category?: string;
+  noindex?: boolean;
+}
+
+const { title, description, section, category, noindex } = Astro.props;
+---
+
+<BaseLayout title={title + ' — ' + profile.name} {description} {noindex}>
+  <header class="page-intro page-shell">
+    {section && <a class="text-link back-link" href={section.href}><span aria-hidden="true">←</span> {section.label}</a>}
+    {category && <p class="meta">{category}</p>}
+    <h1>{title}</h1>
+    <p class="lead secondary-text">{description}</p>
+  </header>
+  <slot />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-lg);
+    padding-block: calc(var(--section-padding) / 2) calc(var(--section-padding) / 2 + var(--space-lg));
+    overflow-wrap: anywhere;
+  }
+
+  .back-link {
+    margin-block-start: calc(-1 * var(--space-sm));
+  }
+
+  h1 {
+    max-inline-size: 16ch;
+    font-family: var(--font-display);
+    font-size: var(--page-heading-size);
+    font-weight: 800;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .lead {
+    max-inline-size: 44ch;
+    font-size: var(--subheading-size);
+    line-height: 1.35;
+  }
+</style>

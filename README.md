@@ -4,7 +4,7 @@
 
 Portfólio pessoal com identidade **minimalista, monocromática e tipograficamente forte**, desenvolvido para apresentar projetos e competências na interseção entre **Artificial Intelligence, Development e Business & Growth**.
 
-Este README é a especificação inicial para construir o projeto em uma IDE (VS Code, Cursor, Windsurf ou equivalente). **Não é um repositório já implementado.** O objetivo é orientar a construção por etapas, mantendo consistência visual, desempenho e clareza para quem visita o portfólio.
+Este README reúne as decisões de produto e o fluxo de desenvolvimento do portfólio. O andamento e as verificações de cada entrega estão em [plan.md](plan.md).
 
 ---
 
@@ -54,65 +54,35 @@ A inspeção técnica identificou, entre outros itens: fundo `#060606`, branco s
 
 ---
 
-## 3. Stack de implementação (proposta)
+## 3. Desenvolvimento
 
-- **Next.js** com App Router, **React** e **TypeScript**.
-- **Tailwind CSS** para utilitários; **CSS variables** para os tokens de design.
-- **CSS nativo** para transições e efeitos simples. Instalar uma biblioteca de animação somente se uma interação justificar.
-- **MDX ou dados TypeScript** para os estudos de caso e projetos. Começar com dados locais; não é necessário CMS no MVP.
-- **Vercel** como opção de publicação, por afinidade com a stack; outros hosts compatíveis são aceitáveis.
+O projeto usa **Astro, TypeScript, Tailwind CSS 4 e Node.js 22**. O Astro gera as páginas e os arquivos estáticos em `dist/`.
 
-### Preparação
-
-Pré-requisitos: Node.js LTS, Git, um gerenciador de pacotes e uma IDE.
-
-No terminal, em uma pasta vazia:
+Na raiz do projeto, com a versão atualizada do Node.js 22 ativa:
 
 ```bash
-npx create-next-app@latest caleb-portfolio --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
-cd caleb-portfolio
+npm ci
 npm run dev
 ```
 
-Abrir `http://localhost:3000` no navegador. Caso o assistente do `create-next-app` faça perguntas adicionais, manter TypeScript, App Router, Tailwind e ESLint ativados. Use as versões estáveis compatíveis instaladas pelo assistente — não dependa de uma versão fixada neste README.
+Para validar e testar a saída de produção:
 
-### Pastas sugeridas
-
-```text
-caleb-portfolio/
-├── public/
-│   ├── images/
-│   └── fonts/                 # somente arquivos licenciados
-├── docs/
-│   └── design-system.json    # cópia de design-system-portfolio-v1.json
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx           # /
-│   │   ├── globals.css
-│   │   ├── ai/page.tsx
-│   │   ├── development/page.tsx
-│   │   ├── business/page.tsx
-│   │   ├── about/page.tsx
-│   │   ├── contact/page.tsx
-│   │   └── projects/[slug]/page.tsx
-│   ├── components/
-│   │   ├── layout/           # Header, Footer, Container, Section
-│   │   ├── typography/       # DisplayHeading, Eyebrow, BodyText
-│   │   ├── projects/         # ProjectIndex, ProjectRow, CaseStudy
-│   │   └── ui/               # Link, Divider, Reveal (se necessário)
-│   ├── content/
-│   │   ├── projects.ts
-│   │   └── profile.ts
-│   ├── lib/
-│   │   └── utils.ts
-│   └── styles/
-│       └── tokens.css
-├── README.md
-└── package.json
+```bash
+npm run check
+npm run build
+npm run preview
 ```
 
-Use esta estrutura como ponto de partida, sem criar arquivos ou abstrações sem necessidade.
+### Estrutura
+
+| Caminho | Conteúdo |
+| --- | --- |
+| `src/pages/` | Homepage, páginas internas e estudos de caso |
+| `src/layouts/` e `src/components/` | Layout e componentes editoriais compartilhados |
+| `src/content/` | Perfil, canais de contato e projetos confirmados |
+| `src/styles/` | Tokens, fontes e estilos globais |
+| `public/` | Favicon e imagem de compartilhamento |
+| `docs/design-system.json` | Design system do portfólio |
 
 ---
 
@@ -151,7 +121,7 @@ A cor não deve ser o principal recurso expressivo. O destaque vem de **escala, 
 
 Regras para o hero: caixa alta, line-height aproximado de `0.89` e tracking inicial `-0.055em`, **ajustados visualmente para evitar corte de glifos**. Não achatar ou esticar fontes por CSS para simular variantes. Testar em larguras reais de tela.
 
-**Uso das fontes:** incluir arquivos licenciados em `public/fonts/` e carregá-los com `next/font/local`. Se a licença ainda não estiver resolvida, trabalhar com fontes de sistema temporárias, sem alegar equivalência visual com Söhne. Pesos devem refletir os arquivos efetivamente disponíveis; evitar negrito sintético.
+**Uso das fontes:** incluir arquivos licenciados em `public/fonts/` e declarar as famílias e os pesos com `@font-face` em `src/styles/fonts.css`. Se a licença ainda não estiver resolvida, trabalhar com fontes de sistema temporárias, sem alegar equivalência visual com Söhne. Pesos devem refletir os arquivos efetivamente disponíveis; evitar negrito sintético.
 
 ### 4.3 Grid, margens e espaçamento
 
@@ -233,7 +203,7 @@ body {
 }
 ```
 
-> Se utilizar `next/font/local`, vincular os nomes das famílias ou as variáveis geradas pelo Next.js aos tokens acima. Os nomes `Sohne`/`Sohne Breit` no snippet são **placeholders de implementação** até que a configuração real de fontes exista.
+> Os nomes `Sohne`/`Sohne Breit` no exemplo representam as famílias aprovadas. A implementação usa os fallbacks documentados em `src/styles/fonts.css` até que os arquivos licenciados estejam disponíveis.
 
 ---
 
@@ -261,45 +231,9 @@ body {
 6. **About teaser:** resumo profissional conciso, sem inflar experiência.
 7. **Footer:** contato e links sociais/profissionais validados.
 
-**Copy exploratória** (não tratar como currículo definitivo):
+**Posicionamento da homepage**
 
-> Building at the intersection of technology, artificial intelligence and business.
-
-Essa frase é um **placeholder editorial** e deve ser revisada antes da publicação. O conteúdo final depende de experiências, projetos e links confirmados pelo proprietário.
-
-### Modelo de estudo de caso
-
-Cada projeto real deve ter:
-
-- **Contexto:** problema ou oportunidade.
-- **Papel:** o que foi feito pessoalmente.
-- **Processo:** decisões, ferramentas, experimentos e trade-offs.
-- **Resultado:** evidência concreta, demo, repositório ou métrica verificável; se não houver, explicar aprendizados sem fabricar números.
-- **Links:** repositório, demo, documentação ou material de apoio, quando autorizados.
-
-Distinguir projetos profissionais, pessoais, estudos e experimentos. Um experimento com IA não deve ser apresentado como produto em produção se não for.
-
-### Conteúdo como dados
-
-No MVP, manter projetos separados do JSX, em `src/content/projects.ts`. Estrutura sugerida:
-
-```ts
-export type Project = {
-  slug: string;
-  title: string;
-  category: "ai" | "development" | "business";
-  summary: string;
-  role?: string;
-  year?: number;
-  status?: "concept" | "experiment" | "completed" | "ongoing";
-  featured?: boolean;
-  links?: { label: string; href: string }[];
-};
-
-export const projects: Project[] = []; // preencher apenas com projetos reais
-```
-
-Não criar projetos fictícios para preencher o layout. Se faltarem cases, valorizar trajetória, habilidades e estudos existentes.
+> Exploring practical uses of AI and software in business.
 
 ---
 
@@ -332,7 +266,7 @@ Não criar projetos fictícios para preencher o layout. Se faltarem cases, valor
 
 ### Fase 0 — Fundação
 
-- [ ] Criar o projeto Next.js + TypeScript.
+- [ ] Criar o projeto Astro + TypeScript.
 - [ ] Copiar este README para a raiz.
 - [ ] Copiar `design-system-portfolio-v1.json` para `docs/design-system.json`.
 - [ ] Definir tokens globais e reset/base CSS.
@@ -372,9 +306,26 @@ Não criar projetos fictícios para preencher o layout. Se faltarem cases, valor
 
 ### Fase 4 — Publicação e evolução
 
-- [ ] Rodar lint e build: `npm run lint` e `npm run build` (se os scripts estiverem disponíveis).
+- [ ] Rodar `npm run check` e `npm run build`.
 - [ ] Revisar links, textos e conteúdo em dispositivos reais.
-- [ ] Publicar em um host compatível e configurar domínio, se houver.
+- [ ] Publicar no Cloudflare Pages conforme a configuração abaixo e associar um domínio próprio, se houver.
+
+#### Cloudflare Pages
+
+Conecte o repositório do portfólio ao projeto Pages. A branch `main` deve conter os arquivos da versão a publicar, incluindo `package-lock.json`.
+
+| Campo | Valor |
+| --- | --- |
+| Framework preset | Astro |
+| Branch de produção | `main` |
+| Diretório raiz | Raiz do repositório |
+| Comando de build | `npm run build` |
+| Diretório de saída | `dist` |
+| Versão do Node.js | `22` (selecionada em `.node-version`) |
+
+Configure a variável de build `SITE_URL` com a origem HTTPS definitiva do portfólio. Use o endereço de produção atribuído pelo Pages ou o domínio próprio confirmado. O build usa essa origem para canonical, `og:url` e a URL absoluta da imagem Open Graph. Se ainda estiver aguardando a URL, gere o primeiro build e repita o deploy depois de configurar a variável. Se optar por upload direto, gere `dist/` com a mesma variável ativa no shell antes do upload.
+
+Depois de publicar, teste a homepage, `/projects/psf-predicts/`, `/contact/` e o recarregamento das rotas internas. Confira o favicon, o card Open Graph, os links públicos e o retorno HTTP 404 para um caminho inexistente.
 - [ ] Atualizar casos de uso e projetos progressivamente.
 
 ---
@@ -393,7 +344,7 @@ Não criar projetos fictícios para preencher o layout. Se faltarem cases, valor
 
 - Evitar animações JavaScript onde CSS resolve.
 - Otimizar imagens e carregar apenas as necessárias.
-- Usar `next/image` quando apropriado e preferir fontes locais licenciadas com carregamento eficiente.
+- Usar `astro:assets` quando apropriado e preferir fontes locais licenciadas com carregamento eficiente.
 - Minimizar bibliotecas e não bloquear a renderização por efeitos decorativos.
 - Avaliar Core Web Vitals após a publicação; não prometer notas antes de medir.
 
@@ -423,7 +374,7 @@ Não criar projetos fictícios para preencher o layout. Se faltarem cases, valor
 Copie o contexto abaixo para o assistente de código da sua IDE **depois** de colocar este README e `docs/design-system.json` no repositório:
 
 ```text
-Você está implementando meu portfólio pessoal em Next.js, TypeScript e Tailwind CSS.
+Você está implementando meu portfólio pessoal em Astro, TypeScript e Tailwind CSS 4.
 Leia o README.md e docs/design-system.json antes de modificar qualquer arquivo.
 
 Objetivo: site pessoal minimalista, fundo #060606, tipografia forte,
@@ -462,10 +413,7 @@ Em caso de conflito, seguir esta ordem:
 
 ## 10. Pendências antes de publicar
 
-- Confirmar tagline e demais textos finais em inglês ou português.
-- Selecionar e documentar projetos verdadeiros por categoria.
-- Confirmar links (GitHub, LinkedIn, e-mail, currículo, demos).
-- Licenciar e fornecer arquivos webfont de Söhne / Söhne Breit ou aprovar uma alternativa.
-- Definir favicon/monograma próprio, domínio e imagem Open Graph.
+- Receber os arquivos web licenciados de Söhne e Söhne Breit, declarar os pesos reais em `src/styles/fonts.css` e validar o carregamento.
+- Definir a URL de produção e conferir o favicon e a imagem Open Graph no ambiente publicado.
 
-**Estado atual:** especificação de design e desenvolvimento. O produto final deve ser validado visualmente após a primeira implementação.
+**Estado da publicação:** o deploy aguarda as fontes licenciadas e a configuração de acesso ao Cloudflare Pages. Consulte o registro de validação em [plan.md](plan.md).

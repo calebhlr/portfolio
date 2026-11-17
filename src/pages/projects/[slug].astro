@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import EditorialSection from '../../components/layout/EditorialSection.astro';
+import { disciplines } from '../../content/profile';
+import { projects, projectTypes } from '../../content/projects';
+import EditorialPage from '../../layouts/EditorialPage.astro';
+
+export const getStaticPaths = (() => projects.map(project => ({
+  params: { slug: project.slug },
+  props: { project },
+}))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { project } = Astro.props;
+const area = disciplines.find(({ id }) => id === project.area);
+const sections = [
+  { id: 'context', title: 'Context', content: project.context },
+  { id: 'role', title: 'Role', content: project.role },
+  { id: 'process', title: 'Process', content: project.process },
+  { id: 'evidence', title: 'Evidence & Results', content: project.evidence },
+];
+---
+
+<EditorialPage
+  title={project.title}
+  description={project.summary}
+  category={projectTypes[project.type]}
+  section={area && { href: '/' + area.id + '/', label: area.title }}
+>
+  {sections.map(({ id, title, content }) => (
+    content && <EditorialSection {id} {title}>
+      <p class="case-copy">{content}</p>
+    </EditorialSection>
+  ))}
+  {project.links && project.links.length > 0 && (
+    <EditorialSection id="links" title="Links">
+      <ul class="flex flex-wrap gap-x-6">
+        {project.links.map(({ label, href }) => (
+          <li><a class="text-link" href={href}>{label}</a></li>
+        ))}
+      </ul>
+    </EditorialSection>
+  )}
+</EditorialPage>
+
+<style>
+  .case-copy {
+    max-inline-size: 60ch;
+  }
+</style>
