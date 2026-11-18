@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caleb · AI Builder</title>
+<meta name="description" content="AI Builder. IA aplicada, automações e produtos digitais.">
+<style is:global>
+:root {
+  --bg: #f6f7f9;
+  --ink: #14181f;
+  --muted: #566070;
+  --line: #d9dde3;
+  --accent: #1f4fd8;
+  --accent-ink: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1217;
+    --ink: #e7eaf0;
+    --muted: #9aa4b2;
+    --line: #272c35;
+    --accent: #8aa8ff;
+    --accent-ink: #0f1217;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+main { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 5rem; }
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.hero h1 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.5rem, 9vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 750;
+}
+.hero p { margin: 0; max-width: 34rem; }
+.hero .role { font-size: 1.1875rem; }
+.hero .study { margin-top: 0.4rem; color: var(--muted); }
+
+h2 {
+  margin: 5rem 0 0.75rem;
+  font-size: 1.375rem;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+.note { margin: 0 0 1rem; max-width: 36rem; color: var(--muted); }
+
+.project { padding: 1.75rem 0; border-top: 1px solid var(--line); }
+.project:last-of-type { border-bottom: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; }
+.head h3 { margin: 0; font-size: 1.1875rem; font-weight: 650; }
+.status {
+  font-size: 0.875rem;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+}
+.project p { margin: 0.6rem 0 0; max-width: 38rem; }
+.project .tools { color: var(--muted); font-size: 0.9375rem; }
+.project .links { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-size: 0.9375rem; }
+
+.contact ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+.contact p { margin: 0 0 0.75rem; }
+
+.replay { margin-top: 1.25rem; max-width: 38rem; }
+.replay[hidden] { display: none; }
+.replay-title { margin: 0 0 0.5rem; font-size: 0.9375rem; font-weight: 650; }
+.replay-title span { font-weight: 400; color: var(--muted); margin-left: 0.5rem; }
+
+.chat { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.chat-head { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); }
+.chat-head strong { display: block; font-size: 0.9375rem; line-height: 1.25; }
+.chat-head .sub { display: block; font-size: 0.8125rem; color: var(--muted); }
+.avatar {
+  position: relative; width: 2rem; height: 2rem; flex: none; border-radius: 50%;
+}
+.avatar::before {
+  content: ""; position: absolute; inset: 2px; border-radius: 50%;
+  background: radial-gradient(circle closest-side, #3c97e0 0%, #e7f1fa 100%);
+}
+.linkbtn {
+  margin-left: auto; flex: none; white-space: nowrap; font: inherit; font-size: 0.875rem; color: var(--muted);
+  background: none; border: 0; padding: 0.2rem 0.3rem; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em;
+}
+.linkbtn[hidden] { display: none; }
+.linkbtn:hover { color: var(--ink); }
+
+.chat-log { height: 25rem; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.chat-log:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.placeholder { margin: auto; max-width: 18rem; text-align: center; color: var(--muted); font-size: 0.9375rem; }
+
+.row { display: flex; align-items: flex-end; gap: 0.5rem; animation: pop 0.18s ease-out; }
+.row.user { justify-content: flex-end; }
+.row .avatar { width: 1.75rem; height: 1.75rem; }
+.row .spacer { width: 1.75rem; flex: none; }
+.bubble { max-width: 82%; padding: 0.55rem 0.8rem; border-radius: 14px; font-size: 0.9375rem; line-height: 1.5; overflow-wrap: anywhere; }
+.bubble .gap { height: 0.5rem; }
+.bubble .li { display: flex; gap: 0.5rem; }
+.bubble .mark { flex: none; }
+.bubble .li-text { min-width: 0; }
+.bubble strong { font-weight: 650; }
+.chat-log.instant .row { animation: none; }
+.row.claude .bubble { background: var(--line); border-bottom-left-radius: 4px; }
+.row.user .bubble { background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
+.row.typing .bubble { display: flex; gap: 4px; padding: 0.85rem 0.9rem; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: blink 1.1s infinite; }
+.dot:nth-child(2) { animation-delay: 0.15s; }
+.dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .row { animation: none; }
+  .dot { animation: none; opacity: 0.6; }
+}
+
+.chat-foot { min-height: 3.5rem; padding: 0.7rem 0.9rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.5rem; }
+.chat-foot .hint { margin-right: auto; font-size: 0.875rem; color: var(--muted); }
+.chip {
+  font: inherit; font-size: 0.9375rem; text-align: left; cursor: pointer;
+  color: var(--accent); background: transparent;
+  border: 1.5px solid var(--accent); border-radius: 999px; padding: 0.35rem 0.95rem;
+}
+.chip:hover { background: var(--accent); color: var(--accent-ink); }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <h1>Comecei vendendo. Agora construo.</h1>
+  <p class="role">AI Builder · IA aplicada, automações e produtos digitais</p>
+  <p class="study">Curso Sistemas para Internet no IFES.</p>
+</header>
+
+<section aria-labelledby="projetos">
+  <h2 id="projetos">Projetos</h2>
+  <p class="note">Desenvolvo com apoio de IA. Cada projeto indica o que decidi, o que foi implementado e o que ainda falta validar.</p>
+
+  <article class="project">
+    <div class="head"><h3>PSF Predict</h3><span class="status">Live</span></div>
+    <p>Aplicativo web de bolão de palpites com ranking, feed e hall da fama, usado por um grupo de amigos durante o mata-mata da Copa do Mundo de 2026. Construí com apoio de IA; é software convencional, sem IA embutida. O bolão já foi encerrado e o app segue no ar.</p>
+    <p class="tools">Ferramentas: React, Vite e TypeScript no front-end (Cloudflare Pages); Hono na API (Cloudflare Workers); PostgreSQL com Drizzle e Neon; Zod; dados de jogos da ESPN.</p>
+    <div class="links">
+      <a href="https://app.psfes.space/">app.psfes.space</a>
+      <a href="https://github.com/calebhlr/REALPSFPREDICT">Código no GitHub</a>
+    </div>
+  </article>
+
+  <article class="project">
+    <div class="head"><h3>Context Engineering Docs</h3><span class="status">Packaged skill</span></div>
+    <p>Skill do Claude Code que gera e audita RULES.md, INITIAL.md e PLAN.md a partir de um repositório, com checklist contra conteúdo inventado. Defini a metodologia, os templates e os critérios de checagem, e é o roteiro que uso nos meus projetos. Na mesma linha, o Prompt Architect transforma pedidos vagos em prompts verificáveis.</p>
+    <p class="tools">Ferramentas: Claude Code (skills), Markdown.</p>
+    <div class="replay" id="replay" hidden>
+      <p class="replay-title">Replay de uma execução real <span>Não é um chat ao vivo.</span></p>
+      <div class="chat">
+        <div class="chat-head">
+          <div class="avatar" aria-hidden="true"></div>
+          <div><strong>context-engineering-docs</strong><span class="sub">Skill do Claude Code</span></div>
+          <button type="button" class="linkbtn" data-skip>Pular para o fim</button>
+        </div>
+        <div class="chat-log" role="log" aria-live="polite" tabindex="0" aria-label="Conversa de teste da skill"></div>
+        <div class="chat-foot"></div>
+      </div>
+      <p class="replay-note">Conversa real, apresentada como chat. As perguntas da skill e as minhas respostas foram separadas em turnos, e os três arquivos gerados (RULES.md, INITIAL.md e PLAN.md) não estão incluídos.</p>
+    </div>
+  </article>
+
+  <article class="project">
+    <div class="head"><h3>THRV · Agente SDR</h3><span class="status">Prototype</span></div>
+    <p>Agente de prospecção B2B que enriquece leads, classifica, decide a próxima ação e gera mensagens, com memória. Traduzi o playbook comercial (ICP, cadências, objeções) em regras do agente e especifiquei os contratos de saída com Pydantic. Corrigi problemas de cache, serialização, estados e persistência. Protótipo em desenvolvimento: ainda sem cenário de ponta a ponta validado e sem cliente em produção.</p>
+    <p class="tools">Ferramentas: Python, Agno, Pydantic.</p>
+  </article>
+
+  <article class="project">
+    <div class="head"><h3>Aurafy</h3><span class="status">Prototype</span></div>
+    <p>Interface de ERP para estúdios de estética (dashboard, agenda, clientes, profissionais, serviços, financeiro e configurações), com requisitos multi-tenant. Protótipo da interface, sem backend em produção. Junto, o case de go-to-market: ICP, JTBD, posicionamento, preço, concorrência e funil. São hipóteses; não há receita nem validação de mercado.</p>
+    <p class="tools">Ferramentas: TypeScript.</p>
+  </article>
+</section>
+
+<section class="contact" aria-labelledby="contato">
+  <h2 id="contato">Contato</h2>
+  <ul>
+    <li><a href="mailto:calebhenrike@gmail.com">calebhenrike@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/calebhlopes/">LinkedIn</a></li>
+    <li><a href="https://github.com/calebhlr">GitHub</a></li>
+  </ul>
+</section>
+
+</main>
+<script>
+(function () {
+  // Conversa real do teste da skill. choice: true = o visitante toca para "enviar" a resposta.
+  var STEPS = [
+  {
+    "who": "user",
+    "text": "/context-engineering-docs\n\ngere os documentos de contexto completo para a criação de um app de delivery"
+  },
+  {
+    "who": "claude",
+    "text": "Qual é o modelo do app de delivery?"
+  },
+  {
+    "who": "user",
+    "choice": true,
+    "text": "Marketplace (vários restaurantes, estilo iFood)"
+  },
+  {
+    "who": "claude",
+    "text": "Quais plataformas e stack para o MVP?"
+  },
+  {
+    "who": "user",
+    "choice": true,
+    "text": "App mobile (React Native/Expo) + painel web"
+  },
+  {
+    "who": "claude",
+    "text": "Quais pagamentos entram no MVP?"
+  },
+  {
+    "who": "user",
+    "choice": true,
+    "text": "Pagamento na entrega (dinheiro/maquininha)"
+  },
+  {
+    "who": "claude",
+    "text": "Criei os três documentos: RULES.md, INITIAL.md e PLAN.md. Não rodei nenhum comando nem consultei documentação oficial, então os comandos e versões ainda são só contrato."
+  },
+  {
+    "who": "claude",
+    "text": "**Postura:** greenfield, porque não havia repositório. Toda escolha técnica está marcada como [DECISION] ou [ASSUMPTION], nunca como fato."
+  },
+  {
+    "who": "claude",
+    "text": "**RULES.md:** contém o fluxo de trabalho do agente e as regras duras do projeto. As principais:\n• RLS em toda tabela.\n• Escrita de pedidos só por função no banco (RPC).\n• Dinheiro em centavos.\n• Sem dados de cartão.\n• Chave de serviço nunca no cliente."
+  },
+  {
+    "who": "claude",
+    "text": "**INITIAL.md:** traz 6 histórias de usuário, FR-001 a FR-023, NFR-001 a NFR-008 e AC-001 a AC-019. Também traz o escopo e as perguntas em aberto."
+  },
+  {
+    "who": "claude",
+    "text": "**PLAN.md:** descreve a arquitetura e a ordem de construção em 4 marcos, com tarefas T001 a T904. O plano de validação tem os 6 níveis. Cada FR, NFR e AC está ligado a pelo menos uma tarefa."
+  },
+  {
+    "who": "claude",
+    "text": "**Decisões minhas, que você pode trocar**\n• **Backend:** Supabase, sem servidor próprio (D-002).\n• **Monorepo:** pnpm, com Next.js no painel web.\n• **Login:** e-mail e senha.\n• **Entrega:** o restaurante entrega com entregadores próprios. Não há app de entregador no MVP."
+  },
+  {
+    "who": "claude",
+    "text": "Fora do MVP: pagamento online, push, variações de produto, publicação nas lojas e deploy em produção."
+  },
+  {
+    "who": "claude",
+    "text": "**Pendente antes de codar**\n• **T001:** verificar na documentação oficial se o Realtime do Supabase respeita RLS e como as Edge Functions acessam a chave de serviço. Há fallback planejado se falhar (polling de 10 s e rotas no Next.js).\n• **Scripts do RULES.md §17:** pnpm lint, pnpm test e os demais só passam a existir depois de T005 e T006. Até lá, não os cite como “passando”.\n• **Aspectos legais:** a política de privacidade e a conformidade com a LGPD precisam de revisão de um profissional habilitado."
+  },
+  {
+    "who": "claude",
+    "text": "**Confirme estes pontos, sem bloquear o início**\n• Quem faz a entrega (Q-001)?\n• Como a plataforma monetiza (Q-002)?\n• Qual o nome comercial (Q-006)?"
+  }
+];
+
+  var root = document.getElementById("replay");
+  if (!root || !STEPS.length) return;
+  root.hidden = false;
+
+  var log = root.querySelector(".chat-log");
+  var foot = root.querySelector(".chat-foot");
+  var skipBtn = root.querySelector("[data-skip]");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var run = 0;
+  var last = null;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+  function sleep(ms, id) {
+    return new Promise(function (resolve) {
+      setTimeout(function () { resolve(id === run); }, reduce ? 0 : ms);
+    });
+  }
+  function toBottom() { log.scrollTop = log.scrollHeight; }
+
+  function inline(parent, str) {
+    str.split("**").forEach(function (part, i) {
+      if (!part) return;
+      parent.appendChild(i % 2 ? el("strong", null, part) : document.createTextNode(part));
+    });
+  }
+  function renderText(bubble, text) {
+    text.split("\n").forEach(function (line) {
+      if (line === "") { bubble.appendChild(el("div", "gap")); return; }
+      if (line.indexOf("\u2022 ") === 0) {
+        var li = el("div", "li");
+        li.appendChild(el("span", "mark", "\u2022"));
+        var t = el("span", "li-text");
+        inline(t, line.slice(2));
+        li.appendChild(t);
+        bubble.appendChild(li);
+      } else {
+        var d = el("div", "line");
+        inline(d, line);
+        bubble.appendChild(d);
+      }
+    });
+  }
+
+  function addRow(who, text, typing) {
+    var row = el("div", "row " + who + (typing ? " typing" : ""));
+    if (who === "claude") {
+      if (last !== "claude") {
+        var av = el("div", "avatar");
+        av.setAttribute("aria-hidden", "true");
+        row.appendChild(av);
+      } else {
+        row.appendChild(el("div", "spacer"));
+      }
+    }
+    var bubble = el("div", "bubble");
+    if (typing) {
+      bubble.setAttribute("aria-label", "Digitando");
+      for (var i = 0; i < 3; i++) bubble.appendChild(el("span", "dot"));
+    } else {
+      renderText(bubble, text);
+      last = who;
+    }
+    row.appendChild(bubble);
+    log.appendChild(row);
+    return row;
+  }
+
+  function reset() { log.textContent = ""; foot.textContent = ""; last = null; }
+  function chip(label, onClick) {
+    var b = el("button", "chip", label);
+    b.type = "button";
+    b.addEventListener("click", onClick);
+    return b;
+  }
+
+  function idle() {
+    reset();
+    skipBtn.hidden = false;
+    log.appendChild(el("p", "placeholder", "Toque em “Iniciar replay” para ver a skill trabalhando."));
+    foot.appendChild(chip("Iniciar replay", start));
+  }
+  function finish() {
+    skipBtn.hidden = true;
+    foot.textContent = "";
+    foot.appendChild(chip("Ver de novo", start));
+  }
+  function choose(label, id) {
+    return new Promise(function (resolve) {
+      foot.textContent = "";
+      var b = chip(label, function () { foot.textContent = ""; resolve(id === run); });
+      foot.appendChild(el("span", "hint", "Toque para responder"));
+      foot.appendChild(b);
+      b.focus({ preventScroll: true });
+    });
+  }
+
+  async function start() {
+    var id = ++run;
+    reset();
+    log.classList.remove("instant");
+    skipBtn.hidden = false;
+    for (var i = 0; i < STEPS.length; i++) {
+      var s = STEPS[i];
+      if (s.who === "claude") {
+        var typing = addRow("claude", "", true);
+        toBottom();
+        if (!(await sleep(Math.min(1500, 500 + s.text.length * 7), id))) return;
+        typing.remove();
+        addRow("claude", s.text);
+      } else {
+        if (s.choice) {
+          if (!(await choose(s.text, id))) return;
+        } else if (!(await sleep(300, id))) return;
+        addRow("user", s.text);
+      }
+      toBottom();
+      if (!(await sleep(350, id))) return;
+    }
+    finish();
+  }
+
+  function showAll() {
+    run++;
+    reset();
+    log.classList.add("instant");
+    STEPS.forEach(function (s) { addRow(s.who, s.text); });
+    log.scrollTop = 0;
+    finish();
+  }
+
+  skipBtn.addEventListener("click", showAll);
+  idle();
+})();
+</script>
+</body>
+</html>
